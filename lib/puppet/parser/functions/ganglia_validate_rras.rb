@@ -32,16 +32,12 @@ module Puppet::Parser::Functions
     # we accept only one arg
     raise Puppet::ParseError, "ganglia_validate_rras(): wrong number of arguments (#{args.length}; must be 1)" unless args.length == 1
 
-    # which must be an array
-    function_validate_array(args)
-
     # that is not empty
     rras = args[0]
     raise Puppet::ParseError, 'ganglia_validate_rras(): passed Array may not be empty' if rras.empty?
 
     # which must contain only Hashes
     rras.each do |r|
-      function_validate_hash([r])
 
       # that are not empty
       raise Puppet::ParseError, 'ganglia_validate_rras(): nested Hash may not be empty' if r.empty?

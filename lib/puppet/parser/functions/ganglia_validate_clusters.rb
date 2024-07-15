@@ -56,17 +56,12 @@ module Puppet::Parser::Functions
     # we accept only one arg
     raise Puppet::ParseError, "ganglia_validate_clusters(): wrong number of arguments (#{args.length}; must be 1)" unless args.length == 1
 
-    # which must be an array
-    # NOTE: This should likely be removed, as it's validated prior to getting here (param type validation)
-    function_validate_array(args)
-
     # that is not empty
     clusters = args[0]
     raise Puppet::ParseError, 'ganglia_validate_clusters(): passed Array may not be empty' if clusters.empty?
 
     # which must contain only Hashes
     clusters.each do |c|
-      function_validate_hash([c])
 
       # that are not empty
       raise Puppet::ParseError, 'ganglia_validate_clusters(): nested Hash may not be empty' if c.empty?
